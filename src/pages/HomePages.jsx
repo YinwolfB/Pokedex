@@ -20,7 +20,7 @@ export const HomePages = () => {
 
     return (
         <div>
-            <h1>PokeDex</h1>
+            <h1>PokéDex</h1>
             <h2>Hi Trainer!</h2>
             <p>To start, please give me your trainer name</p>
             <form onSubmit={handleSubmit}>
