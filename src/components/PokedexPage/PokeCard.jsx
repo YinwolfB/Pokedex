@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect } from "react"
 import { useFetch } from "../../hooks/useFetch"
+import { useNavigate } from "react-router-dom"
 
 export const PokeCard = ({ url }) => {
 
@@ -12,10 +14,16 @@ export const PokeCard = ({ url }) => {
     
     console.log(infoPoke)
 
+    const navigate = useNavigate()
+
+    const handleNavigate = () =>{
+        navigate(`/pokedex/${infoPoke?.id}`)
+    }
+
     return (
-        <article>
+        <article onClick={handleNavigate}>
             <header>
-                <img src={infoPoke?.sprites.other.dream_world.front_default} alt="" /> {/* SE PUEDE USAR TAMBIEN ... infoPoke?.sprites.other["official-artwork"].front_default ... infoPoke?.sprites.other.dream_world.front_default */}
+                <img src={infoPoke?.sprites.other["official-artwork"].front_default} alt="" /> {/* SE PUEDE USAR TAMBIEN ... infoPoke?.sprites.other["official-artwork"].front_default ... infoPoke?.sprites.other.dream_world.front_default */}
                 <section>
                     <h3>{infoPoke?.name}</h3>
                     <ul>{

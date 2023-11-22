@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import { useSelector } from "react-redux"
 import { useFetch } from "../hooks/useFetch"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { PokeCard } from "../components/PokedexPage/PokeCard"
 
 export const PokedexPage = () => {
@@ -16,12 +17,15 @@ export const PokedexPage = () => {
         getPokemons()
     }, [])
 
-
-    console.log(pokemons)
+    const inputSearch = useRef()
 
     return (
         <div>
             <p>Welcome <span>{trainerName}, Here you can find your favorite Pokémon. let's go!</span></p>
+            <form>
+                <input ref={inputSearch} type="text" />
+                <button>Search</button>
+            </form>
             <div>
                 {
                     pokemons?.results.map(poke => (
