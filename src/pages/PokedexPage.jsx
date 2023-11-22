@@ -2,10 +2,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useSelector } from "react-redux"
 import { useFetch } from "../hooks/useFetch"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { PokeCard } from "../components/PokedexPage/PokeCard"
 
 export const PokedexPage = () => {
+
+    const [inputValue, setInputValue] = useState('')
 
     const trainerName = useSelector(store => store.trainerName)
 
@@ -19,16 +21,26 @@ export const PokedexPage = () => {
 
     const inputSearch = useRef()
 
+    const handleSubmit = e => {
+        e.preventDefault()
+        setInputValue(inputSearch.current.value.toLowerCase().trim())
+    }
+
+    const cdFilter = (poke) => {
+        const nameFiltered = poke.name.includes(inputValue)
+        return nameFiltered
+    }
+
     return (
         <div>
             <p>Welcome <span>{trainerName}, Here you can find your favorite Pokémon. let's go!</span></p>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input ref={inputSearch} type="text" />
                 <button>Search</button>
             </form>
             <div>
                 {
-                    pokemons?.results.map(poke => (
+                    pokemons?.results.filter(cdFilter).map(poke => (
                         <PokeCard 
                             key={poke.url}
                             url={poke.url}
