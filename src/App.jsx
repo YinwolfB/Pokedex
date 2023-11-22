@@ -3,20 +3,20 @@ import './App.css'
 import { HomePages } from './pages/HomePages'
 import { PokedexPage } from './pages/PokedexPage'
 import { PokeinfoPage } from './pages/PokeinfoPage'
-import { useSelector } from 'react-redux'
+import { ProtectedRoutes } from './pages/ProtectedRoutes'
 
 function App() {
 
-  const trainerName = useSelector(store => store.trainerName)
 
-  console.log(trainerName)
 
   return (
     <div>
       <Routes>
         <Route path='/' element={<HomePages />} />
-        <Route path='/pokedex' element={<PokedexPage/>} />
-        <Route path='/pokedex/:id' element={<PokeinfoPage/>} />
+        <Route element={<ProtectedRoutes/>} >
+          <Route path='/pokedex' element={<PokedexPage />} />
+          <Route path='/pokedex/:id' element={<PokeinfoPage />} />
+        </Route>
       </Routes>
     </div>
   )
