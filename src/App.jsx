@@ -3,9 +3,13 @@ import './App.css'
 import { HomePages } from './pages/HomePages'
 import { PokedexPage } from './pages/PokedexPage'
 import { PokeinfoPage } from './pages/PokeinfoPage'
+import { useSelector } from 'react-redux'
 
 function App() {
 
+  const trainerName = useSelector(store => store.trainerName)
+
+  console.log(trainerName)
 
   return (
     <div>

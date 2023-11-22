@@ -1,14 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
-
 import { useRef } from "react"
+import { setTrainerName } from "../store/slices/trainerName.slice"
+import { useDispatch } from "react-redux"
 
 export const HomePages = () => {
 
     const inputName = useRef()
 
+    const dispatch = useDispatch()
+
     const handleSubmit = e => {
         e.preventDefault()
-        inputName.current.value.trim()
+        dispatch(setTrainerName(inputName.current.value.trim()))
     }
 
     return (
