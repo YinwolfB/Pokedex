@@ -3,6 +3,6 @@ img{
     max-width: 300px;
 }
 
-input, button{
+input, button,select{
     font-size: 1.4rem;
 }

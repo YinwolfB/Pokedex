@@ -6,17 +6,17 @@ import { useNavigate } from "react-router-dom"
 
 export const PokeCard = ({ url }) => {
 
-    const [ infoPoke, getInfoPoke ] = useFetch(url)
+    const [infoPoke, getInfoPoke] = useFetch(url)
 
     useEffect(() => {
         getInfoPoke()
     }, [])
-    
-    console.log(infoPoke)
+
+    /*console.log(infoPoke) */
 
     const navigate = useNavigate()
 
-    const handleNavigate = () =>{
+    const handleNavigate = () => {
         navigate(`/pokedex/${infoPoke?.id}`)
     }
 
@@ -26,22 +26,21 @@ export const PokeCard = ({ url }) => {
                 <img src={infoPoke?.sprites.other["official-artwork"].front_default} alt="" /> {/* SE PUEDE USAR TAMBIEN ... infoPoke?.sprites.other["official-artwork"].front_default ... infoPoke?.sprites.other.dream_world.front_default */}
                 <section>
                     <h3>{infoPoke?.name}</h3>
-                    <ul>{
-                        infoPoke?.types.map(infoType => (
-                            <li key={infoType.url}> {infoType.type.name}</li>
-                        ))
-                        }
-                    </ul>
-                    <hr />
                     <ul>
-                        {
-                            infoPoke?.stats.map(infoStat => (
-                                <li key={infoStat.stat.url}>
-                                    <span>{infoStat.stat.name}</span>
-                                    <span>{infoStat.base_stat}</span>
-                                </li>
-                            ))
-                        }
+                        {infoPoke?.types.map((infoType, index) => (
+                            <li key={`${infoType.type.name}-${index}`}> {infoType.type.name}</li>
+                        ))}
+                    </ul>
+
+                    <hr />
+
+                    <ul>
+                        {infoPoke?.stats.map((infoStat, index) => (
+                            <li key={`${infoStat.stat.name}-${index}`}>
+                                <span>{infoStat.stat.name}</span>
+                                <span>{infoStat.base_stat}</span>
+                            </li>
+                        ))}
                     </ul>
                 </section>
             </header>
